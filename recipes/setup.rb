@@ -55,16 +55,16 @@ include_recipe 'php'
 #   package "ruby#{ruby_pkg_version.join('')}-devel"
 #   execute "/usr/sbin/alternatives --set ruby /usr/bin/ruby#{ruby_pkg_version.join('.')}"
 # end
-#
-# apt_repository 'apache2' do
-#   uri 'http://ppa.launchpad.net/ondrej/apache2/ubuntu'
-#   distribution node['lsb']['codename']
-#   components %w[main]
-#   keyserver 'keyserver.ubuntu.com'
-#   key 'E5267A6C'
-#   only_if { node['defaults']['webserver']['use_apache2_ppa'] }
-# end
-#
+
+apt_repository 'apache2' do
+  uri 'http://ppa.launchpad.net/ondrej/apache2/ubuntu'
+  distribution node['lsb']['codename']
+  components %w[main]
+  keyserver 'keyserver.ubuntu.com'
+  key 'E5267A6C'
+  only_if { node['defaults']['webserver']['use_apache2_ppa'] }
+end
+
 # gem_package 'bundler' do
 #   action :install
 # end
