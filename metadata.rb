@@ -17,6 +17,7 @@ depends 's3_file'
 depends 'sudo'
 
 depends 'php'
+depends 'composer'
 
 supports 'amazon', '>= 2017.03'
 supports 'ubuntu', '>= 16.04'

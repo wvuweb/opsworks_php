@@ -5,6 +5,9 @@ default['deployer']['user'] = 'deploy'
 default['deployer']['group'] = 'deploy'
 default['deployer']['home'] = "/home/#{default['deployer']['user']}"
 
+# composer
+default['composer']['version'] = node['composer'].try(:[], 'version') || '1.6.5'
+
 # ruby
 default['build-essential']['compile_time'] = true
 default['ruby-version'] = node['ruby'].try(:[], 'version') || '2.5'
