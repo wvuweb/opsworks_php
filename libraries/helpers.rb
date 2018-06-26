@@ -91,6 +91,16 @@ def every_enabled_rds(context, application)
   end
 end
 
+def perform_composer_install(shared_path, envs = {})
+  execute 'composer install' do
+    command "usr/local/bin/composer install"
+    user node['deployer']['user'] || 'root'
+    group www_group
+    environment envs
+    cwd release_path
+  end
+end
+
 def perform_bundle_install(shared_path, envs = {})
   bundle_path = "#{shared_path}/vendor/bundle"
 

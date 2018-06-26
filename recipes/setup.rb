@@ -44,6 +44,11 @@ end
 
 # PHP
 include_recipe 'php'
+
+php_pear 'php_curl' do
+  action :upgrade
+end
+
 include_recipe 'composer'
 
 # Ruby and bundler

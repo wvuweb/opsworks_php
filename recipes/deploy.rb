@@ -72,6 +72,7 @@ every_enabled_application do |application|
     end
 
     before_symlink do
+      perform_composer_install(shared_path, env_vars) unless framework.migrate?
       # perform_bundle_install(shared_path, env_vars) unless framework.migrate?
 
       fire_hook(
