@@ -119,7 +119,16 @@ module Drivers
       end
 
       def appserver_site_config_template(appserver_adapter)
-        "appserver.#{adapter}.#{appserver_adapter == 'passenger' ? 'passenger' : 'upstream'}.conf.erb"
+        case "appserver.#{adapter}.#{appserver_adapter}"
+        when 'passenger'
+          "appserver.#{adapter}.passenger.conf.erb"
+        when "php"
+          "appserver.#{adapter}.php.conf.erb"
+        else
+          "appserver.#{adapter}.upstream.conf.erb"
+        end
+
+        # "appserver.#{adapter}.#{appserver_adapter == 'passenger' ? 'passenger' : 'upstream'}.conf.erb"
       end
     end
   end
