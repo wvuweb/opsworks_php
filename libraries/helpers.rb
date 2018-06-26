@@ -93,7 +93,7 @@ end
 
 def perform_composer_install(shared_path, envs = {})
   execute 'composer install' do
-    command "usr/local/bin/composer install"
+    command "/usr/local/bin/composer install"
     user node['deployer']['user'] || 'root'
     group www_group
     environment envs
