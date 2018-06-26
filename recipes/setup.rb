@@ -46,11 +46,6 @@ end
 include_recipe 'php'
 include_recipe 'composer'
 
-composer_install_global "package" do
-  version node['composer']['version']
-  action :install
-end
-
 # Ruby and bundler
 # if node['platform_family'] == 'debian'
 #   node.default['ruby-ng']['ruby_version'] = node['ruby-version']
