@@ -62,6 +62,7 @@ every_enabled_application do |application|
     migration_command(framework.out[:migration_command]) if framework.out[:migration_command]
     migrate framework.migrate?
     before_migrate do
+      perform_composer_install(shared_path, env_vars)
       # perform_bundle_install(shared_path, env_vars)
 
       fire_hook(
