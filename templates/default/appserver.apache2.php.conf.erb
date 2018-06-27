@@ -13,8 +13,7 @@ Listen <%= @out[:port] %>
   <Directory <%= File.join(@deploy_dir, 'current') %>>
     Options FollowSymLinks
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
   </Directory>
 
   LogLevel <%= @out[:log_level] %>
@@ -49,8 +48,7 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
   <Directory <%= File.join(@deploy_dir, 'current') %>>
     Options FollowSymLinks
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
   </Directory>
 
   SSLEngine on

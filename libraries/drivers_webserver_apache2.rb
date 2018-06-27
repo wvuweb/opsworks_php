@@ -119,7 +119,6 @@ module Drivers
       end
 
       def appserver_site_config_template(appserver_adapter)
-        Chef::Log.info("Configuring #{adapter} with #{appserver_adapter}")
         case appserver_adapter
         when 'passenger'
           "appserver.#{adapter}.passenger.conf.erb"
