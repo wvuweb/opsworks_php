@@ -83,7 +83,6 @@ module Drivers
                  name: a.adapter, deploy_env: deploy_env, appserver_config: a.webserver_config_params }
         return unless Drivers::Appserver::Base.adapters.include?(opts[:name])
         generate_appserver_config(opts, site_config_template(opts[:name]), site_config_template_cookbook)
-        generate_appserver_extra_config_dir(opts)
       end
 
       def generate_appserver_config(opts, source_template, source_cookbook)
@@ -94,17 +93,6 @@ module Drivers
           source source_template.to_s
           cookbook source_cookbook.to_s
           variables opts
-        end
-      end
-
-      def generate generate_appserver_extra_config_dir(opts)
-        directory "#{opts[:conf_dir]}/sites-available/#{app['shortname']}.conf.d" do
-          recursive false
-          user 'root'
-          group 'root'
-          mode '0644'
-          action :create
-          only_if { !::File.directory?("#{opts[:conf_dir]}/sites-available/#{app['shortname']}.conf.d") }
         end
       end
 

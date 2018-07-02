@@ -118,6 +118,26 @@ module Drivers
         end
       end
 
+      def add_appserver_config
+        a = Drivers::Appserver::Factory.build(context, app)
+        opts = { application: app, deploy_dir: deploy_dir(app), out: out, conf_dir: conf_dir, adapter: adapter,
+                 name: a.adapter, deploy_env: deploy_env, appserver_config: a.webserver_config_params }
+        return unless Drivers::Appserver::Base.adapters.include?(opts[:name])
+        generate_appserver_config(opts, site_config_template(opts[:name]), site_config_template_cookbook)
+        generate_appserver_extra_config_dir(opts)
+      end
+
+      def generate_appserver_extra_config_dir(opts)
+        context.directory "#{opts[:conf_dir]}/sites-available/#{app['shortname']}.conf.d" do
+          recursive false
+          user 'root'
+          group 'root'
+          mode '0644'
+          action :create
+          only_if { !::File.directory?("#{opts[:conf_dir]}/sites-available/#{app['shortname']}.conf.d") }
+        end
+      end
+
       def appserver_site_config_template(appserver_adapter)
         case appserver_adapter
         when 'passenger'
