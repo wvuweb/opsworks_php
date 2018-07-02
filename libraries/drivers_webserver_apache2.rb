@@ -128,13 +128,13 @@ module Drivers
       end
 
       def generate_appserver_extra_config_dir(opts)
-        context.directory "#{opts[:conf_dir]}/sites-available/#{app['shortname']}.conf.d" do
+        context.directory "#{opts[:conf_dir]}/sites-available/#{context.app['shortname']}.conf.d" do
           recursive false
           user 'root'
           group 'root'
           mode '0644'
           action :create
-          only_if { !::File.directory?("#{opts[:conf_dir]}/sites-available/#{app['shortname']}.conf.d") }
+          only_if { !::File.directory?("#{opts[:conf_dir]}/sites-available/#{context.app['shortname']}.conf.d") }
         end
       end
 
