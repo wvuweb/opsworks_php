@@ -8,7 +8,7 @@ Listen <%= @out[:port] %>
   ServerName <%= node['hostname'] %>
   ServerAlias <%= @application[:domains].join(" ") %>
 
-  DocumentRoot <%= File.join(@deploy_dir, 'current', 'public') %>
+  DocumentRoot <%= File.join(@deploy_dir, 'current', @application[:docroot]) %>
 
   <Directory <%= File.join(@deploy_dir, 'current') %>>
     Options FollowSymLinks
