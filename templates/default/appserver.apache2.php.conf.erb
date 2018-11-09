@@ -10,6 +10,10 @@ Listen <%= @out[:port] %>
 
   DocumentRoot <%= File.join(@deploy_dir, 'current', @application[:attributes][:document_root]) %>
 
+  <IfModule newrelic-php5>
+    php_value newrelic.appname "<%= @application[:shortname]%>"
+  </IfModule>
+
   <Directory <%= File.join(@deploy_dir, 'current') %>>
     Options FollowSymLinks
     AllowOverride None
@@ -44,6 +48,10 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
   ServerAlias <%= @application[:domains].join(" ") %>
 
   DocumentRoot <%= File.join(@deploy_dir, 'current', 'public') %>
+
+  <IfModule newrelic-php5>
+    php_value newrelic.appname "<%= @application[:shortname]%>"
+  </IfModule>
 
   <Directory <%= File.join(@deploy_dir, 'current') %>>
     Options FollowSymLinks
