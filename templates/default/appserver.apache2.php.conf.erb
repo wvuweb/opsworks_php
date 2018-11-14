@@ -10,9 +10,8 @@ Listen <%= @out[:port] %>
 
   DocumentRoot <%= File.join(@deploy_dir, 'current', @application[:attributes][:document_root]) %>
 
-  <IfModule newrelic-php5>
-    php_value newrelic.appname "<%= @application[:shortname]%>"
-  </IfModule>
+  php_flag newrelic.enabled true
+  php_value newrelic.appname "<%= @application[:shortname]%>"
 
   <Directory <%= File.join(@deploy_dir, 'current') %>>
     Options FollowSymLinks
