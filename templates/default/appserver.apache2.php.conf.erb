@@ -11,7 +11,6 @@ Listen <%= @out[:port] %>
   DocumentRoot <%= File.join(@deploy_dir, 'current', @application[:attributes][:document_root]) %>
 
   <IfModule mod_php7.c>
-    php_flag newrelic.enabled true
     php_value date.timezone "America/New_York"
     php_value newrelic.license "<%= node['newrelic']['application_monitoring']['license'] %>"
     php_value newrelic.appname "<%= @application[:shortname]%>"
